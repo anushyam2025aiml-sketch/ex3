@@ -30,7 +30,7 @@ public class stuController {
 
     // 2. Get student by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Studententity> getStudentById(@PathVariable int id) {
+    public ResponseEntity<Studententity> getStudentById(@PathVariable Long id) {
         Optional<Studententity> student = studentRepository.findById(id);
         return student.map(ResponseEntity::ok)
                       .orElseGet(() -> ResponseEntity.notFound().build());
@@ -45,7 +45,7 @@ public class stuController {
 
     // 4. Update an existing student
     @PutMapping("/{id}")
-    public ResponseEntity<Studententity> updateStudent(@PathVariable int id, 
+    public ResponseEntity<Studententity> updateStudent(@PathVariable Long id, 
                                                        @RequestBody Studententity studentDetails) {
         Optional<Studententity> optionalStudent = studentRepository.findById(id);
 
@@ -64,7 +64,7 @@ public class stuController {
 
     // 5. Delete a student
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteStudent(@PathVariable int id) {
+    public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
         if (studentRepository.existsById(id)) {
             studentRepository.deleteById(id);
             return ResponseEntity.noContent().build();
